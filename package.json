@@ -1,0 +1,43 @@
+{
+  "author": {
+    "email": "m8@em8.pl",
+    "name": "Michał Łaszczewski",
+    "url": "http://realtime.guru/"
+  },
+  "bugs": {
+    "url": "https://github.com/reactiveobserver/reactive-dao/issues"
+  },
+  "dependencies": {
+    "sockjs-client": "*"
+  },
+  "description": "universal reactive data access object",
+  "devDependencies": {
+    "babel-loader": "^6.2.5",
+    "babel-plugin-transform-react-jsx": "*",
+    "babel-preset-es2015": "*",
+    "better-assert": "github:devinrhode2/better-assert-browser",
+    "mocha": "^3.1.0"
+  },
+  "directories": {},
+  "homepage": "",
+  "license": "MIT",
+  "main": "index.js",
+  "browser": "browser.js",
+  "maintainers": [
+    {
+      "email": "michal@emikse.com",
+      "name": "Michał Łaszczewski"
+    }
+  ],
+  "name": "reactive-dao",
+  "optionalDependencies": {},
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "compileTests": "webpack test/*.js tests-bundle.js"
+  },
+  "version": "0.0.1"
+}
