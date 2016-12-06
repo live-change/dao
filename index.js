@@ -1,24 +1,18 @@
-import ReactiveDao from "./lib/ReactiveDao.js"
-var rd = ReactiveDao
+const ReactiveDao = require("./lib/ReactiveDao.js")
 
-import Observable from "./lib/Observable.js"
-import ObservableValue from "./lib/ObservableValue.js"
+const Observable = require("./lib/Observable.js")
+ReactiveDao.Observable = Observable
 
-rd.Observable = ObservableValue
-export { Observable }
-rd.ObservableValue = ObservableValue
-export { ObservableValue }
+const ObservableValue = require("./lib/ObservableValue.js")
+ReactiveDao.ObservableValue = ObservableValue
 
-import ReactiveServer from "./lib/ReactiveServer.js"
-rd.ReactiveServer = ReactiveServer
-export { ReactiveServer }
+const ReactiveServer = require("./lib/ReactiveServer.js")
+ReactiveDao.ReactiveServer = ReactiveServer
 
-import ReactiveCache from "./lib/ReactiveCache.js"
-rd.ReactiveCache = ReactiveCache
-export { ReactiveCache }
+const ReactiveCache = require("./lib/ReactiveCache.js")
+ReactiveDao.ReactiveCache = ReactiveCache
 
-import ReactiveConnection from "./lib/ReactiveConnection.js"
-rd.ReactiveConnection = ReactiveConnection
-export { ReactiveConnection }
+const ReactiveConnection = require("./lib/ReactiveConnection.js")
+ReactiveDao.ReactiveConnection = ReactiveConnection
 
-export default rd
+module.exports = ReactiveDao
