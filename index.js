@@ -15,4 +15,7 @@ ReactiveDao.ReactiveCache = ReactiveCache
 const ReactiveConnection = require("./lib/ReactiveConnection.js")
 ReactiveDao.ReactiveConnection = ReactiveConnection
 
+const SimpleDao = require("./lib/SimpleDao.js")
+ReactiveDao.SimpleDao = SimpleDao
+
 module.exports = ReactiveDao
