@@ -6,7 +6,7 @@ ReactiveDao.Observable = Observable
 const ObservableValue = require("./lib/ObservableValue.js")
 ReactiveDao.ObservableValue = ObservableValue
 
-const ObservableList = require("./lib/ObservableValue.js")
+const ObservableList = require("./lib/ObservableList.js")
 ReactiveDao.ObservableList = ObservableList
 
 const ReactiveServer = require("./lib/ReactiveServer.js")
