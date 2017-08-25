@@ -21,4 +21,7 @@ ReactiveDao.ReactiveConnection = ReactiveConnection
 const SimpleDao = require("./lib/SimpleDao.js")
 ReactiveDao.SimpleDao = SimpleDao
 
+const ObservablePromiseProxy = require("./lib/ObservablePromiseProxy.js")
+ReactiveDao.ObservablePromiseProxy = ObservablePromiseProxy
+
 module.exports = ReactiveDao
