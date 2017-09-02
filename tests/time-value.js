@@ -45,7 +45,7 @@ test("time value", (t) => {
     client.settings.onDisconnect = () => {
       t.pass("disconnected")
       t.end()
-      process.exit();
+      process.exit()
     }
     client.dispose()
   })

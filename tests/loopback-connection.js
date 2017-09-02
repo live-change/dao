@@ -4,7 +4,7 @@ const ReactiveDao = require("../index.js")
 const LoopbackConnection = require('../lib/LoopbackConnection.js')
 
 test("loopback connection", (t) => {
-  t.plan(3)
+  t.plan(4)
   let sessionId = ""+Math.random()
 
   let server

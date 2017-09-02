@@ -10,8 +10,8 @@ setInterval(() => {
 }, 50)
 
 
-function generator(sessionId, ip) {
-  return new ReactiveDao(sessionId, ip, {
+function generator(sessionId) {
+  return new ReactiveDao(sessionId, {
     test: {
       type: "local",
       source: new ReactiveDao.SimpleDao({
@@ -74,10 +74,10 @@ function generator(sessionId, ip) {
 }
 
 module.exports.instant = generator
-module.exports.promised = (sessionId, ip) => new Promise((resolve, reject) => {
-  setTimeout(() => resolve(generator()), 50)
+module.exports.promised = (sessionId) => new Promise((resolve, reject) => {
+  setTimeout(() => resolve(generator(sessionId)), 50)
 })
 
-module.exports.failedPromise = (sessionId, ip) => new Promise((resolve, reject) => {
+module.exports.failedPromise = (sessionId) => new Promise((resolve, reject) => {
   setTimeout(() => reject("error"))
 })
