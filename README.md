@@ -10,7 +10,6 @@ Features
 2. Resynchronization after reconnect
 3. Asynchronous events
 4. Pluggable lower layer implementation - existing plugins: WebSocket, SockJS
-5. 
 
 Messaging problem
 =====
