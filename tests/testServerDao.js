@@ -64,9 +64,6 @@ function generator(sessionId) {
               return new Promise((resolve, reject) => reject("error"))
             }
           }
-        },
-        methods: {
-          logout: () => revs.command("session", "logout", { sessionId, ip })
         }
       })
     }
