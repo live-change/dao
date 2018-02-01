@@ -7,9 +7,7 @@
   "bugs": {
     "url": "https://github.com/reactiveobserver/reactive-dao/issues"
   },
-  "dependencies": {
-    "sockjs-client": "*"
-  },
+  "dependencies": {},
   "description": "universal reactive data access object",
   "devDependencies": {
     "blue-tape": "^1.0.0"

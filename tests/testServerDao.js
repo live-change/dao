@@ -64,6 +64,9 @@ function generator(sessionId) {
               return new Promise((resolve, reject) => reject("error"))
             }
           }
+        },
+        methods: {
+          logout: () => console.log('logout action')
         }
       })
     }
