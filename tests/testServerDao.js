@@ -66,7 +66,7 @@ function generator(sessionId) {
           }
         },
         methods: {
-          logout: () => revs.command("session", "logout", { sessionId, ip })
+          logout: () => console.log('logout action')
         }
       })
     }
