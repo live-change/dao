@@ -20,7 +20,7 @@ test("click list", (t) => {
 
   let clicksObservable, clicksObserver, ticks = 0
   t.test('observe server clicks list', (t) => {
-    t.plan(51)
+    t.plan(15)
 
     let initialized = false
 
@@ -59,9 +59,10 @@ test("click list", (t) => {
     client.settings.onDisconnect = () => {
       t.pass("disconnected")
       t.end()
-      process.exit();
     }
     client.dispose()
   })
 
-});
+})
+
+test.onFinish(() => process.exit(0))

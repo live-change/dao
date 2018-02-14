@@ -35,9 +35,10 @@ test("loopback connection", (t) => {
     client.settings.onDisconnect = () => {
       t.pass("disconnected")
       t.end()
-      process.exit();
     }
     client.dispose()
   })
 
-});
+})
+
+test.onFinish(() => process.exit(0))

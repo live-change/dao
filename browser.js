@@ -5,7 +5,7 @@ import Observable from "./lib/Observable.js"
 import ObservableValue from "./lib/ObservableValue.js"
 import ObservableList from "./lib/ObservableList.js"
 
-rd.Observable = ObservableValue
+rd.Observable = Observable
 export { Observable }
 rd.ObservableValue = ObservableValue
 export { ObservableValue }
