@@ -20,4 +20,16 @@ import ReactiveConnection from "./lib/ReactiveConnection.js"
 rd.ReactiveConnection = ReactiveConnection
 export { ReactiveConnection }
 
+import ObservableError from "./lib/ObservableError.js"
+rd.ObservableValue = ObservableError
+export { ObservableError }
+
+import ConnectionMonitorPinger from "./lib/ConnectionMonitorPinger.js"
+rd.ConnectionMonitorPinger = ConnectionMonitorPinger
+export { ConnectionMonitorPinger }
+
+import ConnectionMonitorPingReceiver from "./lib/ConnectionMonitorPingReceiver.js"
+rd.ConnectionMonitorPingReceiver = ConnectionMonitorPingReceiver
+export { ConnectionMonitorPingReceiver }
+
 export default rd

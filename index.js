@@ -24,4 +24,13 @@ ReactiveDao.SimpleDao = SimpleDao
 const ObservablePromiseProxy = require("./lib/ObservablePromiseProxy.js")
 ReactiveDao.ObservablePromiseProxy = ObservablePromiseProxy
 
+const ObservableError = require("./lib/ObservableError.js")
+ReactiveDao.ObservableError = ObservableError
+
+const ConnectionMonitorPinger = require("./lib/ConnectionMonitorPinger.js")
+ReactiveDao.ConnectionMonitorPinger = ConnectionMonitorPinger
+
+const ConnectionMonitorPingReceiver = require("./lib/ConnectionMonitorPingReceiver.js")
+ReactiveDao.ConnectionMonitorPingReceiver = ConnectionMonitorPingReceiver
+
 module.exports = ReactiveDao
