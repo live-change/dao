@@ -17,7 +17,7 @@ test("connection monitors", (t) => {
     server = new ReactiveDao.ReactiveServer(testServerDao.promised,{
       connectionMonitorFactory(connection) {
         console.log("CREATE SERVER CONNECTION MONITOR")
-        return clientMonitor = new ReactiveDao.ConnectionMonitorPingReceiver(connection, {
+        return serverMonitor = new ReactiveDao.ConnectionMonitorPingReceiver(connection, {
           pingInterval: 200
         })
       }
@@ -31,7 +31,7 @@ test("connection monitors", (t) => {
       delay: 50,
       connectionMonitorFactory(connection) {
         console.log("CREATE CLIENT CONNECTION MONITOR")
-        return serverMonitor = new ReactiveDao.ConnectionMonitorPinger(connection, {
+        return clientMonitor = new ReactiveDao.ConnectionMonitorPinger(connection, {
           pingInterval: 50,
           pongInterval: 200
         })
