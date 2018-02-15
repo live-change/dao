@@ -74,6 +74,7 @@ function generator(sessionId) {
 }
 
 module.exports.instant = generator
+
 module.exports.promised = (sessionId) => new Promise((resolve, reject) => {
   setTimeout(() => resolve(generator(sessionId)), 50)
 })
@@ -81,3 +82,5 @@ module.exports.promised = (sessionId) => new Promise((resolve, reject) => {
 module.exports.failedPromise = (sessionId) => new Promise((resolve, reject) => {
   setTimeout(() => reject("error"))
 })
+
+module.exports.failed = (sessionId) => { throw new Error("error") }
