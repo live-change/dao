@@ -24,7 +24,7 @@ test("click list", (t) => {
 
     let initialized = false
 
-    clicksObservable = client.observable(['test','clicks'],ReactiveDao.ObservableList)
+    clicksObservable = client.observable(['test','clicks'], ReactiveDao.ObservableList)
     clicksObserver = {
       set(clicks){
         t.pass("got initial list! "+clicks)

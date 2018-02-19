@@ -15,7 +15,7 @@ test("time value", (t) => {
     client = new LoopbackConnection(sessionId, server, {
       delay: 50
     })
-    client.on('authenticationError', (err) => t.pass("authentication failed!"))
+    client.once('authenticationError', (err) => t.pass("authentication failed!"))
   })
 
   t.test('create connection with dao factory throwing exception', (t) => {
@@ -24,7 +24,7 @@ test("time value", (t) => {
     client = new LoopbackConnection(sessionId, server, {
       delay: 50
     })
-    client.on('authenticationError', (err) => t.pass("authentication failed!"))
+    client.once('authenticationError', (err) => t.pass("authentication failed!"))
   })
 
 })

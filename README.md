@@ -187,3 +187,52 @@ export default (sessionId) => new ReactiveDao(sessionId, {
 })
 ```
 Here a generator is a function/constructor that will create local objects that reacts for server generated notifications.
+
+ReactiveConnection settings
+===
+```
+  {  
+  
+    /**
+      When request is started in disconnected state then it will be
+      added to requests queue and sent after reconnect
+    **/
+    queueRequestsWhenDisconnected: true,
+    
+    /**
+      How long request could be in queue
+    **/  
+    requestSendTimeout: 2300,
+    
+    /**
+      How long request will wait for response; 0 for no timeout
+    **/
+    requestTimeout: 0,
+    
+    /**
+      On disconnect active requests(without replies) can be added to
+      queue
+    **/
+    queueActiveRequestsOnDisconnect: false
+    
+    /**
+      Reconnect delay
+    **/
+    autoReconnectDelay: 200,
+    
+    /**
+      Log level ( 0 or 1 )
+    **/  
+    logLevel: 0,
+    
+    /**
+      Function that creates connection monitor
+    **/  
+    connectionMonitorFactory: (connection) =>
+      new ReactiveDao.ConnectionMonitorPinger(connection, {
+        pingInterval: 50,
+        pongInterval: 200
+      })
+      
+  }
+```

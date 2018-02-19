@@ -1,7 +1,18 @@
 const ReactiveDao = require("../index.js")
 
-let timeObservable = new ReactiveDao.ObservableValue(Date.now());
-let clicksObservable = new ReactiveDao.ObservableList([]);
+let timeObservable = new ReactiveDao.ObservableValue(Date.now())
+let clicksObservable = new ReactiveDao.ObservableList([])
+
+class ObservableCounter extends ReactiveDao.ObservableValue {
+  constructor(v) {
+    super(v)
+  }
+  inc() {
+    this.value++
+    this.fireObservers('inc')
+  }
+}
+let counterObservable = new ObservableCounter(0)
 
 setInterval(() => {
   timeObservable.set(Date.now())
@@ -9,8 +20,8 @@ setInterval(() => {
   if( clicksObservable.list.length > 5 ) clicksObservable.shift()
 }, 50)
 
-
 function generator(sessionId) {
+  console.log("CREATE DAO")
   return new ReactiveDao(sessionId, {
     test: {
       type: "local",
@@ -63,9 +74,23 @@ function generator(sessionId) {
             get() {
               return new Promise((resolve, reject) => reject("error"))
             }
+          },
+          counter: {
+            observable() {
+              return counterObservable
+            },
+            get() {
+              return counterObservable.value
+            }
           }
         },
         methods: {
+          increment: () => {
+            counterObservable.inc()
+          },
+          reset: () => {
+            counterObservable.set(0)
+          },
           logout: () => console.log('logout action')
         }
       })
@@ -84,3 +109,5 @@ module.exports.failedPromise = (sessionId) => new Promise((resolve, reject) => {
 })
 
 module.exports.failed = (sessionId) => { throw new Error("error") }
+
+module.exports.ObservableCounter = ObservableCounter
