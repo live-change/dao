@@ -252,15 +252,21 @@ Time Synchronization
       interval = pingInterval + countOfSyncPings * pingIntervalIncrement
     **/  
     pingInterval: 1000,
-    pingIntervalIncrement: 500
-    maxPingInterval: 5000
+    pingIntervalIncrement: 500,
+    maxPingInterval: 5000,
+    /**
+      minimal synchronization pong count before conversion is possible
+    **/
+    minPongCount: 1
   })
   
   /// pass time synchronization object to connectionSettings
   ...
-  
-  let localTimeMillis = timeSynchronization.serverToLocal(tsFromServer) 
-  let serverTime = timeSynchronization.localToServer(Date.now())
+
+  timeSynchronization.synchronizedPromise.then(
+    timeDifference => {
+      let localTimeMillis = timeSynchronization.serverToLocal(tsFromServer)
+      let serverTime = timeSynchronization.localToServer(Date.now())
+    })
+
 ```
-
-

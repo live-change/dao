@@ -11,7 +11,8 @@ test("time synchronization", (t) => {
   let client
   let timeSynchronization = new ReactiveDao.TimeSynchronization({
     pingInterval: 50,
-    pingIntervalIncrement: 0
+    pingIntervalIncrement: 0,
+    minPongCount: 3
   })
   t.test('create connection', (t) => {
     t.plan(1)
@@ -25,13 +26,13 @@ test("time synchronization", (t) => {
 
   t.test('check if time is synchronized', (t) => {
     t.plan(1)
-    setTimeout(() => {
+    timeSynchronization.synchronizedPromise().then(diff => {
       console.log("MINIMAL DIFF", timeSynchronization.minimalDiff)
       console.log("MAXIMAL DIFF", timeSynchronization.maximalDiff)
-      if(timeSynchronization.timeDiff > 5) t.fail("too big time diff")
-      else if(timeSynchronization.timeDiff < -5) t.fail("too small time diff")
+      if(diff > 5) t.fail("too big time diff")
+      else if(diff < -5) t.fail("too small time diff")
       else t.pass('synchronized')
-    }, 320)
+    })
   })
 
   t.test('disconnect from server', (t) => {
