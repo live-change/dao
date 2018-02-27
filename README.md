@@ -263,7 +263,7 @@ Time Synchronization
   /// pass time synchronization object to connectionSettings
   ...
 
-  timeSynchronization.synchronizedPromise.then(
+  timeSynchronization.synchronizedPromise().then(
     timeDifference => {
       let localTimeMillis = timeSynchronization.serverToLocal(tsFromServer)
       let serverTime = timeSynchronization.localToServer(Date.now())
