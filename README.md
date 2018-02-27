@@ -234,5 +234,33 @@ ReactiveConnection settings
         pongInterval: 200
       })
       
+    /**
+      Time synchronization object
+    **/    
+    timeSynchronization: null
   }
 ```
+
+Time Synchronization
+========
+
+```
+  /// Create time synchronization object
+  let timeSynchronization = new ReactiveDao.TimeSynchronization({
+    /**
+      Synchronization ping
+      interval = pingInterval + countOfSyncPings * pingIntervalIncrement
+    **/  
+    pingInterval: 1000,
+    pingIntervalIncrement: 500
+    maxPingInterval: 5000
+  })
+  
+  /// pass time synchronization object to connectionSettings
+  ...
+  
+  let localTimeMillis = timeSynchronization.serverToLocal(tsFromServer) 
+  let serverTime = timeSynchronization.localToServer(Date.now())
+```
+
+
