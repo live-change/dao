@@ -32,4 +32,8 @@ import ConnectionMonitorPingReceiver from "./lib/ConnectionMonitorPingReceiver.j
 rd.ConnectionMonitorPingReceiver = ConnectionMonitorPingReceiver
 export { ConnectionMonitorPingReceiver }
 
+import TimeSynchronization from "./lib/TimeSynchronization.js"
+rd.TimeSynchronization = TimeSynchronization
+export { TimeSynchronization }
+
 export default rd
