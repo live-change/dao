@@ -21,7 +21,7 @@ rd.ReactiveConnection = ReactiveConnection
 export { ReactiveConnection }
 
 import ObservableError from "./lib/ObservableError.js"
-rd.ObservableValue = ObservableError
+rd.ObservableError = ObservableError
 export { ObservableError }
 
 import ConnectionMonitorPinger from "./lib/ConnectionMonitorPinger.js"
