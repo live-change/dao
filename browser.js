@@ -7,8 +7,10 @@ import ObservableList from "./lib/ObservableList.js"
 
 rd.Observable = Observable
 export { Observable }
+
 rd.ObservableValue = ObservableValue
 export { ObservableValue }
+
 rd.ObservableList = ObservableList
 export { ObservableList }
 
@@ -23,6 +25,14 @@ export { ReactiveConnection }
 import ObservableError from "./lib/ObservableError.js"
 rd.ObservableError = ObservableError
 export { ObservableError }
+
+import ObservableProxy from "./lib/ObservableProxy.js"
+rd.ObservableProxy = ObservableProxy
+export { ObservableProxy }
+
+import ObservablePromiseProxy from "./lib/ObservablePromiseProxy.js"
+rd.ObservablePromiseProxy = ObservablePromiseProxy
+export { ObservablePromiseProxy }
 
 import ConnectionMonitorPinger from "./lib/ConnectionMonitorPinger.js"
 rd.ConnectionMonitorPinger = ConnectionMonitorPinger
