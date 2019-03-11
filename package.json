@@ -7,7 +7,9 @@
   "bugs": {
     "url": "https://github.com/reactiveobserver/reactive-dao/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "debug": "^4.1.1"
+  },
   "description": "universal reactive data access object",
   "devDependencies": {
     "blue-tape": "^1.0.0"
