@@ -39,4 +39,7 @@ ReactiveDao.ConnectionMonitorPingReceiver = ConnectionMonitorPingReceiver
 const TimeSynchronization = require("./lib/TimeSynchronization.js")
 ReactiveDao.TimeSynchronization = TimeSynchronization
 
+const ReactiveDaoProxy = require("./lib/ReactiveDaoProxy.js")
+ReactiveDao.ReactiveDaoProxy = ReactiveDaoProxy
+
 module.exports = ReactiveDao
