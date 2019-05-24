@@ -18,6 +18,10 @@ import ReactiveCache from "./lib/ReactiveCache.js"
 rd.ReactiveCache = ReactiveCache
 export { ReactiveCache }
 
+import ReactiveDaoProxy from "./lib/ReactiveDaoProxy.js"
+rd.ReactiveDaoProxy = ReactiveDaoProxy
+export { ReactiveDaoProxy }
+
 import ReactiveConnection from "./lib/ReactiveConnection.js"
 rd.ReactiveConnection = ReactiveConnection
 export { ReactiveConnection }
