@@ -42,4 +42,7 @@ ReactiveDao.TimeSynchronization = TimeSynchronization
 const ReactiveDaoProxy = require("./lib/ReactiveDaoProxy.js")
 ReactiveDao.ReactiveDaoProxy = ReactiveDaoProxy
 
+const collectPointers = require("./lib/collectPointers.js")
+ReactiveDao.collectPointers = collectPointers
+
 module.exports = ReactiveDao
