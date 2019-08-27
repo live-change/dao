@@ -20,6 +20,43 @@ setInterval(() => {
   if( clicksObservable.list.length > 5 ) clicksObservable.shift()
 }, 50)
 
+const roles = [
+  {
+    id: 0,
+    name: "admin"
+  },
+  {
+    id: 1,
+    name: "user"
+  }
+]
+
+const users = [
+  {
+    id: 0,
+    name: "test1",
+    role: 0
+  },
+  {
+    id: 1,
+    name: "test2",
+    role: 1
+  },
+  {
+    id: 2,
+    name: "test3",
+    role: 1
+  },
+  {
+    id: 3,
+    name: "test4",
+    role: 1
+  }
+]
+const userIds = new ReactiveDao.ObservableList(users.map(u => u.id))
+const userObservables = users.map(u => new ReactiveDao.ObservableValue(u))
+const roleObservables = roles.map(r => new ReactiveDao.ObservableValue(r))
+
 function generator(sessionId) {
   console.log("CREATE DAO")
   return new ReactiveDao(sessionId, {
@@ -81,6 +118,30 @@ function generator(sessionId) {
             },
             get() {
               return counterObservable.value
+            }
+          },
+          users: {
+            observable() {
+              return userIds
+            },
+            get() {
+              return Promise.resolve(userIds.list)
+            }
+          },
+          user: {
+            observable({ user }) {
+              return userObservables[user]
+            },
+            get({ user }) {
+              return Promise.resolve(users[user])
+            }
+          },
+          role: {
+            observable({ role }) {
+              return roleObservables[role]
+            },
+            get({ role }) {
+              return Promise.resolve(roles[role])
             }
           }
         },

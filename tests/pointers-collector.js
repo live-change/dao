@@ -2,7 +2,7 @@ const test = require('blue-tape')
 const ReactiveDao = require("../index.js")
 
 test("pointers collector", (t) => {
-  t.plan(4)
+  t.plan(6)
 
   t.test("simple property", (t) => {
     t.plan(1)
@@ -12,6 +12,26 @@ test("pointers collector", (t) => {
       ["users", "User", { property: "user" }]
     ])
     t.deepEqual(pointers, [["users","User","123"]], "found one user")
+  })
+
+  t.test("simple property from array", (t) => {
+    t.plan(1)
+    let pointers = ReactiveDao.collectPointers([
+      { user: "123" },
+      { user: "233" }
+    ],[
+      ["users", "User", { property: "user" }]
+    ])
+    t.deepEqual(pointers, [["users","User","123"], ["users","User","233"]], "found two users")
+  })
+
+  t.test("identity pointers", (t) => {
+    t.plan(1)
+    let pointers = ReactiveDao.collectPointers([ 0, 1, 2, 3 ], [
+      [ 'test', 'user', { identity: true } ]
+    ])
+    t.deepEqual(pointers, [ [ 'test', 'user', 0 ], [ 'test', 'user', 1 ], [ 'test', 'user', 2 ],
+      [ 'test', 'user', 3 ] ])
   })
 
   t.test("array property tags", (t) => {
@@ -59,6 +79,4 @@ test("pointers collector", (t) => {
       { path: ["tags","3"] }
     ], "complex result computed properly")
   })
-
-
 })
