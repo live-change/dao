@@ -21,6 +21,7 @@ test("click list", (t) => {
   let clicksObservable, clicksObserver, ticks = 0
   t.test('observe server clicks list', (t) => {
     t.plan(15)
+    t.timeoutAfter(700)
 
     let initialized = false
 
