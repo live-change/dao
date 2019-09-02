@@ -20,9 +20,9 @@ test("get more", (t) => {
 
   t.test('get users list with one level of dependencies', (t) => {
     t.plan(1)
-    client.getMore(["test", "users"], [
+    client.get({ what: ["test", "users"], more: [
         { schema: [["test", "user", { user : { identity: true } }]] }
-    ]).then(res => {
+    ]}).then(res => {
       t.deepEqual(res, [
         { "what": [ "test",  "users" ],
           "data": [ 0, 1, 2, 3 ]
@@ -45,14 +45,14 @@ test("get more", (t) => {
 
   t.test('get users list with two levels of dependencies', (t) => {
     t.plan(1)
-    client.getMore(["test", "users"], [
+    client.get({ what: ["test", "users"], more: [
       {
         schema: [["test", "user", { user : { identity: true } }]],
         more: [{
           schema: [["test", "role", { role: { property: "role" } }]]
         }]
       }
-    ]).then(res => {
+    ]}).then(res => {
       t.deepEqual(res, [
         { "what": [ "test",  "users" ],
           "data": [ 0, 1, 2, 3 ]
