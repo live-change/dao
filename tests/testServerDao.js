@@ -28,6 +28,10 @@ const roles = [
   {
     id: 1,
     name: "user"
+  },
+  {
+    id: 2,
+    name: "tester"
   }
 ]
 
@@ -53,6 +57,7 @@ const users = [
     role: 1
   }
 ]
+
 const userIds = new ReactiveDao.ObservableList(users.map(u => u.id))
 const userObservables = users.map(u => new ReactiveDao.ObservableValue(u))
 const roleObservables = roles.map(r => new ReactiveDao.ObservableValue(r))
@@ -146,6 +151,17 @@ function generator(sessionId) {
           }
         },
         methods: {
+          addUser(name, role) {
+            const user = { id: users.length, name, role }
+            userObservables.push(new ReactiveDao.ObservableValue(user))
+            users.push(user)
+            userIds.push(user.id)
+          },
+          removeUser(id) {
+            userIds.remove(id)
+            users.splice(id, 1)
+            userObservables.splice(id, 1)
+          },
           increment: () => {
             counterObservable.inc()
           },
