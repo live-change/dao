@@ -1,4 +1,4 @@
-const test = require('blue-tape');
+const test = require('blue-tape')
 const testServerDao = require('./testServerDao.js')
 const ReactiveDao = require("../index.js")
 const LoopbackConnection = require('../lib/LoopbackConnection.js')
@@ -21,6 +21,7 @@ test("click list", (t) => {
   let clicksObservable, clicksObserver, ticks = 0
   t.test('observe server clicks list', (t) => {
     t.plan(15)
+    t.timeoutAfter(700)
 
     let initialized = false
 

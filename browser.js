@@ -50,4 +50,8 @@ import TimeSynchronization from "./lib/TimeSynchronization.js"
 rd.TimeSynchronization = TimeSynchronization
 export { TimeSynchronization }
 
+import collectPointers from "./lib/collectPointers.js"
+rd.collectPointers = collectPointers
+export { collectPointers }
+
 export default rd
