@@ -2,7 +2,7 @@ const test = require('blue-tape')
 const ReactiveDao = require("../index.js")
 
 test("pointers collector", (t) => {
-  t.plan(7)
+  t.plan(8)
 
   t.test("simple property", (t) => {
     t.plan(1)
@@ -92,5 +92,13 @@ test("pointers collector", (t) => {
         { source: 'city', schema: { property: "name" } }]
     ], (src) => sources[src])
     t.deepEqual(pointers, [ [ 'findProjects', [ 'cats', 'dogs', 'birds' ], 'NY' ] ])
+  })
+
+  t.test("undefined argument", (t) => {
+    t.plan(1)
+    let pointers = ReactiveDao.collectPointers({ sessionId: 1 },[
+      ["users", "User", { property: "user" }]
+    ])
+    t.deepEqual(pointers, [])
   })
 })
