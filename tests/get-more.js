@@ -4,7 +4,7 @@ const ReactiveDao = require("../index.js")
 const LoopbackConnection = require('../lib/LoopbackConnection.js')
 
 test("get more", (t) => {
-  t.plan(4)
+  t.plan(5)
   let sessionId = "" + Math.random()
 
   let server
@@ -76,6 +76,27 @@ test("get more", (t) => {
           "data": { "id": 1, "name": "user" }
         }
       ], "got object with dependencies")
+    })
+  })
+
+  t.test('get projects by user and language', (t) => {
+    t.plan(1)
+    client.get({
+      paths: [
+        { schema: [['test', 'userProjectsByLanguage', { object: {
+          user: { source: ['test', 'me'], schema: { identity: true } },
+          language: { source: ['test', 'languageByName', { object: { name: 'js' } }], schema: { identity: true } }
+        }}]] }
+      ]
+    }).then(res => {
+      t.deepEqual(res, [
+        { "what": [ "test", "me" ],
+          "data": 0 },
+        { "what": [ "test", "languageByName", { "name": "js" } ],
+          "data": 0 },
+        { "what": [ "test", "userProjectsByLanguage", { "user": 0, "language": 0 } ],
+          "data": [ 0 ] }
+      ])
     })
   })
 

@@ -58,9 +58,51 @@ const users = [
   }
 ]
 
+const languages = [
+  {
+    id: 0,
+    name: 'js'
+  },
+  {
+    id: 1,
+    name: 'java'
+  },
+  {
+    id: 2,
+    name: 'cpp'
+  }
+]
+
+const projects = [
+  {
+    id: 0,
+    name: "reactive-dao",
+    owner: 0,
+    language: 0
+  },
+  {
+    id: 1,
+    name: "jvm",
+    owner: 0,
+    language: 1
+  },
+  {
+    id: 2,
+    name: "box2d",
+    owner: 0,
+    language: 2
+  }
+]
+
 const userIds = new ReactiveDao.ObservableList(users.map(u => u.id))
 const userObservables = users.map(u => new ReactiveDao.ObservableValue(u))
 const roleObservables = roles.map(r => new ReactiveDao.ObservableValue(r))
+
+const languageIds = new ReactiveDao.ObservableList(languages.map(u => u.id))
+const languageObservables = languages.map(u => new ReactiveDao.ObservableValue(u))
+const projectIds = new ReactiveDao.ObservableList(projects.map(u => u.id))
+const projectObservables = projects.map(u => new ReactiveDao.ObservableValue(u))
+
 
 function generator(sessionId) {
   console.log("CREATE DAO")
@@ -141,12 +183,73 @@ function generator(sessionId) {
               return Promise.resolve(users[user])
             }
           },
+          me: {
+            observable() {
+              return userObservables[0]
+            },
+            get() {
+              return Promise.resolve(0)
+            }
+          },
           role: {
             observable({ role }) {
               return roleObservables[role]
             },
             get({ role }) {
               return Promise.resolve(roles[role])
+            }
+          }, 
+          languages: {
+            observable() {
+              return languageIds
+            },
+            get() {
+              return Promise.resolve(languageIds.list)
+            }
+          },
+          language: {
+            observable({ language }) {
+              return languageObservables[language]
+            },
+            get({ language }) {
+              return Promise.resolve(languages[language])
+            }
+          },
+          languageByName: {
+            observable({ name }) {
+              const l = languages.find(l => l.name == name)
+              return languageObservables[l.id]
+            },
+            get({ name }) {
+              const l = languages.find(l => l.name == name)
+              console.log("L BN",name, l)
+              return Promise.resolve(l.id)
+            }
+          },
+          projects: {
+            observable() {
+              return projectIds
+            },
+            get() {
+              return Promise.resolve(projectIds.list)
+            }
+          },
+          project: {
+            observable({project}) {
+              return projectObservables[project]
+            },
+            get({project}) {
+              return Promise.resolve(projects[project])
+            }
+          },
+          userProjectsByLanguage: {
+            observable({ user, language }) {
+              const foundProjects = projects.filter(p => p.owner == user && p.language == language ).map(p => p.id)
+              return new ReactiveDao.Observable(foundProjects)
+            },
+            get({ user, language }) {
+              const foundProjects = projects.filter(p => p.owner == user && p.language == language ).map(p => p.id)
+              return Promise.resolve(foundProjects)
             }
           }
         },

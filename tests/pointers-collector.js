@@ -89,7 +89,7 @@ test("pointers collector", (t) => {
     let pointers = ReactiveDao.collectPointers({}, [
       ["findProjects",
         { source: 'interests', schema: { array: { identity: true } }},
-        { source: 'city', schema: { property: "name" } }]
+        { source: { static: 'city' }, schema: { property: "name" } }]
     ], (src) => sources[src])
     t.deepEqual(pointers, [ [ 'findProjects', [ 'cats', 'dogs', 'birds' ], 'NY' ] ])
   })
