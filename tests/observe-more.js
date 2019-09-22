@@ -4,7 +4,7 @@ const ReactiveDao = require("../index.js")
 const LoopbackConnection = require('../lib/LoopbackConnection.js')
 
 test("observe more", (t) => {
-  t.plan(5)
+  t.plan(6)
   let sessionId = "" + Math.random()
 
   let server
@@ -174,42 +174,43 @@ test("observe more", (t) => {
 
   })
 
-  /*  t.test('get users list with two levels of dependencies', (t) => {
+  t.test('test observation of projects by user and language', (t) => {
     t.plan(1)
-    client.get({ paths: [{ what: ["test", "users"], more: [
-      {
-        schema: [["test", "user", { user : { identity: true } }]],
-        more: [{
-          schema: [["test", "role", { role: { property: "role" } }]]
-        }]
+    let observable
+    let observer
+
+    t.test('observe projects by user and language', (t) => {
+      t.plan(4)
+      observable = client.observable({
+        paths: [
+          { schema: [['test', 'userProjectsByLanguage', { object: {
+                user: { source: ['test', 'me'], schema: { property: 'id' } },
+                language: { source: ['test', 'languageByName', { object: { name: 'js' } }], schema: { property: 'id' } }
+              }}]] }
+        ]
+      }, ReactiveDao.ObservableList)
+      const checkPointers = () => {
+        const paths = observable.list
+        t.pass(`got paths ${paths.map(p => JSON.stringify(p))}`)
+        setTimeout(() => {
+          for (let path of paths) {
+            if (client.observations.get(JSON.stringify(path))) t.pass(`path ${JSON.stringify(path)} pushed`)
+            else t.fail(`path ${JSON.stringify(path)} not pushed`)
+          }
+        }, 50)
       }
-    ]}]}).then(res => {
-      t.deepEqual(res, [
-        { "what": [ "test",  "users" ],
-          "data": [ 0, 1, 2, 3 ]
+      observer = {
+        set(paths) {
+          if(observable.list.length == 3) checkPointers()
         },
-        { "what": [ "test", "user", { "user": 0 } ],
-          "data": { "id": 0, "name": "test1", "role": 0 }
-        },
-        { "what": [ "test", "user", { "user": 1 } ],
-          "data": { "id": 1, "name": "test2", "role": 1 }
-        },
-        { "what": [ "test", "user", { "user": 2} ],
-          "data": { "id": 2, "name": "test3", "role": 1}
-        },
-        { "what": [ "test", "user", { "user": 3 } ],
-          "data": { "id": 3, "name": "test4", "role": 1}
-        },
-        { "what": [ "test", "role", { "role": 0 } ],
-          "data": { "id": 0, "name": "admin" }
-        },
-        { "what": [ "test", "role", { "role": 1 } ],
-          "data": { "id": 1, "name": "user" }
+        push(path) {
+          if(observable.list.length == 3) checkPointers()
         }
-      ], "got object with dependencies")
+      }
+      observable.observe(observer)
     })
   })
-*/
+
   t.test('disconnect from server', (t) => {
     t.plan(1)
     client.settings.onDisconnect = () => {

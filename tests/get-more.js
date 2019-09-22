@@ -84,16 +84,16 @@ test("get more", (t) => {
     client.get({
       paths: [
         { schema: [['test', 'userProjectsByLanguage', { object: {
-          user: { source: ['test', 'me'], schema: { identity: true } },
-          language: { source: ['test', 'languageByName', { object: { name: 'js' } }], schema: { identity: true } }
+          user: { source: ['test', 'me'], schema: { property: 'id' } },
+          language: { source: ['test', 'languageByName', { object: { name: 'js' } }], schema: { property: 'id' } }
         }}]] }
       ]
     }).then(res => {
       t.deepEqual(res, [
         { "what": [ "test", "me" ],
-          "data": 0 },
+          "data": { id: 0, name: 'test1', role: 0 } },
         { "what": [ "test", "languageByName", { "name": "js" } ],
-          "data": 0 },
+          "data": { id: 0, name: 'js' }  },
         { "what": [ "test", "userProjectsByLanguage", { "user": 0, "language": 0 } ],
           "data": [ 0 ] }
       ])

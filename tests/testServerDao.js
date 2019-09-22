@@ -188,7 +188,7 @@ function generator(sessionId) {
               return userObservables[0]
             },
             get() {
-              return Promise.resolve(0)
+              return Promise.resolve(users[0])
             }
           },
           role: {
@@ -222,8 +222,7 @@ function generator(sessionId) {
             },
             get({ name }) {
               const l = languages.find(l => l.name == name)
-              console.log("L BN",name, l)
-              return Promise.resolve(l.id)
+              return Promise.resolve(l)
             }
           },
           projects: {
