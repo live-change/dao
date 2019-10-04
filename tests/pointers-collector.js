@@ -2,7 +2,7 @@ const test = require('blue-tape')
 const ReactiveDao = require("../index.js")
 
 test("pointers collector", (t) => {
-  t.plan(9)
+  t.plan(12)
 
   t.test("simple property", (t) => {
     t.plan(1)
@@ -109,4 +109,45 @@ test("pointers collector", (t) => {
     ])
     t.deepEqual(pointers, [])
   })
+
+  t.test("switch match", (t) => {
+    t.plan(1)
+    let pointers = ReactiveDao.collectPointers({
+      country: "PL"
+    },[
+      [{ value: { property: "country" }, switch: {
+          PL: "Warsaw",
+          US: "New York"
+        }}]
+    ])
+    t.deepEqual(pointers, [["Warsaw"]], "switch working")
+  })
+
+  t.test("switch default", (t) => {
+    t.plan(1)
+    let pointers = ReactiveDao.collectPointers({
+      country: "UX"
+    },[
+      [{ value: { property: "country" }, switch: {
+          PL: "Warsaw",
+          US: "New York"
+        },
+        default: "London"}]
+    ])
+    t.deepEqual(pointers, [["London"]], "switch working")
+  })
+
+  t.test("switch not match", (t) => {
+    t.plan(1)
+    let pointers = ReactiveDao.collectPointers({
+      country: "UX"
+    },[
+      [{ value: { property: "country" }, switch: {
+          PL: "Warsaw",
+          US: "New York"
+        }}]
+    ])
+    t.deepEqual(pointers, [], "switch working")
+  })
+
 })
