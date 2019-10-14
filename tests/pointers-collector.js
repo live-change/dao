@@ -2,7 +2,7 @@ const test = require('blue-tape')
 const ReactiveDao = require("../index.js")
 
 test("pointers collector", (t) => {
-  t.plan(12)
+  t.plan(13)
 
   t.test("simple property", (t) => {
     t.plan(1)
@@ -148,6 +148,16 @@ test("pointers collector", (t) => {
         }}]
     ])
     t.deepEqual(pointers, [], "switch working")
+  })
+
+  t.test("test nonEmpty", (t) => {
+    t.plan(1)
+    let pointers = ReactiveDao.collectPointers({
+      user: null
+    },[
+      ["users", "User", { nonEmpty: { property: "user" }}]
+    ])
+    t.deepEqual(pointers, [], "nulls are filtered")
   })
 
 })
