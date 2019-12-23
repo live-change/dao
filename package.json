@@ -9,8 +9,8 @@
     "url": "https://github.com/live-change/dao/issues"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/live-change/dao.git"
+    "type": "git",
+    "url": ""
   },
   "dependencies": {
     "debug": "^4.1.1",
@@ -33,12 +33,8 @@
   "name": "@live-change/dao",
   "optionalDependencies": {},
   "readme": "README.md",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "scripts": {
     "test": "NODE_ENV=test blue-tape tests/*"
   },
-  "version": "0.2.0"
+  "version": "0.2.1"
 }
