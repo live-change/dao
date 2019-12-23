@@ -26,7 +26,7 @@
       "name": "Michał Łaszczewski"
     }
   ],
-  "name": "reactive-dao",
+  "name": "@live-change/dao",
   "optionalDependencies": {},
   "readme": "README.md",
   "repository": {
