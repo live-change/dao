@@ -2,21 +2,25 @@
   "author": {
     "email": "m8@em8.pl",
     "name": "Michał Łaszczewski",
-    "url": "http://realtime.guru/"
+    "url": "https://www.viamage.com/"
   },
+  "homepage": "https://github.com/live-change/dao",
   "bugs": {
-    "url": "https://github.com/reactiveobserver/reactive-dao/issues"
+    "url": "https://github.com/live-change/dao/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
   },
   "dependencies": {
     "debug": "^4.1.1",
     "supports-color": "^6.1.0"
   },
-  "description": "universal reactive data access object",
+  "description": "live data access object",
   "devDependencies": {
     "blue-tape": "^1.0.0"
   },
   "directories": {},
-  "homepage": "",
   "license": "MIT",
   "main": "index.js",
   "browser": "browser.js",
@@ -26,15 +30,11 @@
       "name": "Michał Łaszczewski"
     }
   ],
-  "name": "reactive-dao",
+  "name": "@live-change/dao",
   "optionalDependencies": {},
   "readme": "README.md",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "scripts": {
     "test": "NODE_ENV=test blue-tape tests/*"
   },
-  "version": "0.1.0"
+  "version": "0.2.3"
 }
