@@ -18,6 +18,9 @@ ReactiveDao.ReactiveCache = ReactiveCache
 const ReactiveConnection = require("./lib/ReactiveConnection.js")
 ReactiveDao.ReactiveConnection = ReactiveConnection
 
+const LoopbackConnection = require('./lib/LoopbackConnection.js')
+ReactiveDao.LoopbackConnection = LoopbackConnection
+
 const SimpleDao = require("./lib/SimpleDao.js")
 ReactiveDao.SimpleDao = SimpleDao
 

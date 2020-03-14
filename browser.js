@@ -26,6 +26,10 @@ import ReactiveConnection from "./lib/ReactiveConnection.js"
 rd.ReactiveConnection = ReactiveConnection
 export { ReactiveConnection }
 
+import LoopbackConnection from "./lib/LoopbackConnection.js"
+rd.LoopbackConnection = LoopbackConnection
+export { LoopbackConnection }
+
 import ObservableError from "./lib/ObservableError.js"
 rd.ObservableError = ObservableError
 export { ObservableError }
