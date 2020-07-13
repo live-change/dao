@@ -1,16 +1,15 @@
 import ReactiveDao from "./lib/ReactiveDao.js"
-var rd = ReactiveDao
+let rd = ReactiveDao
 
 import Observable from "./lib/Observable.js"
-import ObservableValue from "./lib/ObservableValue.js"
-import ObservableList from "./lib/ObservableList.js"
-
 rd.Observable = Observable
 export { Observable }
 
+import ObservableValue from "./lib/ObservableValue.js"
 rd.ObservableValue = ObservableValue
 export { ObservableValue }
 
+import ObservableList from "./lib/ObservableList.js"
 rd.ObservableList = ObservableList
 export { ObservableList }
 
@@ -29,6 +28,10 @@ export { ReactiveConnection }
 import LoopbackConnection from "./lib/LoopbackConnection.js"
 rd.LoopbackConnection = LoopbackConnection
 export { LoopbackConnection }
+
+import SimpleDao from "./lib/SimpleDao.js"
+rd.SimpleDao = SimpleDao
+export { SimpleDao }
 
 import ObservableError from "./lib/ObservableError.js"
 rd.ObservableError = ObservableError
