@@ -23,7 +23,7 @@
   "directories": {},
   "license": "MIT",
   "main": "index.js",
-  "browser": "browser.js",
+  "browsernpm ": "browser.js",
   "maintainers": [
     {
       "email": "michal@emikse.com",
