@@ -2,7 +2,7 @@ const test = require('blue-tape')
 const ReactiveDao = require("../index.js")
 
 test("pointers collector", (t) => {
-  t.plan(13)
+  t.plan(14)
 
   t.test("simple property", (t) => {
     t.plan(1)
@@ -159,5 +159,73 @@ test("pointers collector", (t) => {
     ])
     t.deepEqual(pointers, [], "nulls are filtered")
   })
+
+  t.test("test complex property fetch", (t) => {
+    t.plan(1)
+    let pointers = ReactiveDao.collectPointers({
+      "data": {
+        "sidebarItems": [
+          {
+            "category": [
+              "subject",
+              "b1c840d5b5f6949c34545a9afc22ae0e",
+              null
+            ]
+          },
+          {
+            "category": [
+              "subject",
+              "7491ba08936b462d28f875c6cfb16dde",
+              "5b6ee5d81d698e6408302138aff15028",
+              null
+            ]
+          }
+        ]
+      }
+    },[
+      ['categories', 'CategoryOne', { object: {
+          category: { nonEmpty: { property: ['data', 'sidebarItems','category'] } }
+      } }]
+    ])
+    t.deepEqual(pointers, [
+          [
+            "categories",
+            "CategoryOne",
+            {
+              "category": "subject"
+            }
+          ],
+          [
+            "categories",
+            "CategoryOne",
+            {
+              "category": "b1c840d5b5f6949c34545a9afc22ae0e"
+            }
+          ],
+          [
+            "categories",
+            "CategoryOne",
+            {
+              "category": "subject"
+            }
+          ],
+          [
+            "categories",
+            "CategoryOne",
+            {
+              "category": "7491ba08936b462d28f875c6cfb16dde"
+            }
+          ],
+          [
+            "categories",
+            "CategoryOne",
+            {
+              "category": "5b6ee5d81d698e6408302138aff15028"
+            }
+          ]
+        ], "results match")
+  })
+
+
 
 })
