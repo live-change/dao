@@ -13,12 +13,12 @@
     "url": "https://github.com/live-change/dao.git"
   },
   "dependencies": {
-    "debug": "^4.1.1",
-    "supports-color": "^6.1.0"
+    "debug": "^4.1.1"
   },
   "description": "live data access object",
   "devDependencies": {
-    "blue-tape": "^1.0.0"
+    "blue-tape": "^1.0.0",
+    "supports-color": "^6.1.0"
   },
   "directories": {},
   "license": "MIT",
