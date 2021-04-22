@@ -36,5 +36,5 @@
   "scripts": {
     "test": "NODE_ENV=test blue-tape tests/*"
   },
-  "version": "0.2.37"
+  "version": "0.2.38"
 }
