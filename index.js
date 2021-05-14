@@ -1,51 +1,56 @@
-const ReactiveDao = require("./lib/ReactiveDao.js")
+const Dao = require("./lib/Dao.js")
 
 const Observable = require("./lib/Observable.js")
-ReactiveDao.Observable = Observable
+Dao.Observable = Observable
 
 const ObservableValue = require("./lib/ObservableValue.js")
-ReactiveDao.ObservableValue = ObservableValue
+Dao.ObservableValue = ObservableValue
 
 const ObservableList = require("./lib/ObservableList.js")
-ReactiveDao.ObservableList = ObservableList
+Dao.ObservableList = ObservableList
 
 const ReactiveServer = require("./lib/ReactiveServer.js")
-ReactiveDao.ReactiveServer = ReactiveServer
+Dao.ReactiveServer = ReactiveServer
 
-const ReactiveCache = require("./lib/ReactiveCache.js")
-ReactiveDao.ReactiveCache = ReactiveCache
+const DaoPrerenderCache = require("./lib/DaoPrerenderCache.js")
+Dao.DaoPrerenderCache = DaoPrerenderCache
+Dao.ReactiveCache = DaoPrerenderCache // BACKWARD COMPATIBILITY
 
 const ReactiveConnection = require("./lib/ReactiveConnection.js")
-ReactiveDao.ReactiveConnection = ReactiveConnection
+Dao.ReactiveConnection = ReactiveConnection
 
 const LoopbackConnection = require('./lib/LoopbackConnection.js')
-ReactiveDao.LoopbackConnection = LoopbackConnection
+Dao.LoopbackConnection = LoopbackConnection
 
 const SimpleDao = require("./lib/SimpleDao.js")
-ReactiveDao.SimpleDao = SimpleDao
+Dao.SimpleDao = SimpleDao
 
 const ObservableProxy = require("./lib/ObservableProxy.js")
-ReactiveDao.ObservableProxy = ObservableProxy
+Dao.ObservableProxy = ObservableProxy
 
 const ObservablePromiseProxy = require("./lib/ObservablePromiseProxy.js")
-ReactiveDao.ObservablePromiseProxy = ObservablePromiseProxy
+Dao.ObservablePromiseProxy = ObservablePromiseProxy
 
 const ObservableError = require("./lib/ObservableError.js")
-ReactiveDao.ObservableError = ObservableError
+Dao.ObservableError = ObservableError
 
 const ConnectionMonitorPinger = require("./lib/ConnectionMonitorPinger.js")
-ReactiveDao.ConnectionMonitorPinger = ConnectionMonitorPinger
+Dao.ConnectionMonitorPinger = ConnectionMonitorPinger
 
 const ConnectionMonitorPingReceiver = require("./lib/ConnectionMonitorPingReceiver.js")
-ReactiveDao.ConnectionMonitorPingReceiver = ConnectionMonitorPingReceiver
+Dao.ConnectionMonitorPingReceiver = ConnectionMonitorPingReceiver
 
 const TimeSynchronization = require("./lib/TimeSynchronization.js")
-ReactiveDao.TimeSynchronization = TimeSynchronization
+Dao.TimeSynchronization = TimeSynchronization
 
-const ReactiveDaoProxy = require("./lib/ReactiveDaoProxy.js")
-ReactiveDao.ReactiveDaoProxy = ReactiveDaoProxy
+const DaoProxy = require("./lib/DaoProxy.js")
+Dao.ReactiveDaoProxy = DaoProxy // BACKWARD COMPATIBILITY
+Dao.DaoProxy = DaoProxy
+
+const DaoCache = require("./lib/DaoCache.js")
+Dao.DaoCache = DaoCache
 
 const collectPointers = require("./lib/collectPointers.js")
-ReactiveDao.collectPointers = collectPointers
+Dao.collectPointers = collectPointers
 
-module.exports = ReactiveDao
+module.exports = Dao

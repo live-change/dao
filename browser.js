@@ -1,5 +1,5 @@
-import ReactiveDao from "./lib/ReactiveDao.js"
-let rd = ReactiveDao
+import Dao from "./lib/Dao.js"
+let rd = Dao
 
 import Observable from "./lib/Observable.js"
 rd.Observable = Observable
@@ -13,13 +13,21 @@ import ObservableList from "./lib/ObservableList.js"
 rd.ObservableList = ObservableList
 export { ObservableList }
 
-import ReactiveCache from "./lib/ReactiveCache.js"
-rd.ReactiveCache = ReactiveCache
-export { ReactiveCache }
+import DaoPrerenderCache from "./lib/DaoPrerenderCache.js"
+const ReactiveCache = DaoPrerenderCache // backward compatibility
+rd.ReactiveCache = DaoPrerenderCache // backward compatibility
+rd.DaoPrerenderCache = DaoPrerenderCache
+export { ReactiveCache, DaoPrerenderCache }
 
-import ReactiveDaoProxy from "./lib/ReactiveDaoProxy.js"
-rd.ReactiveDaoProxy = ReactiveDaoProxy
-export { ReactiveDaoProxy }
+import DaoProxy from "./lib/DaoProxy.js"
+const ReactiveDaoProxy = DaoProxy // backward compatibility
+rd.ReactiveDaoProxy = DaoProxy // backward compatibility
+rd.DaoProxy = DaoProxy
+export { ReactiveDaoProxy, DaoProxy }
+
+import DaoCache from "./lib/DaoCache.js"
+rd.DaoCache = DaoCache
+export { DaoCache }
 
 import ReactiveConnection from "./lib/ReactiveConnection.js"
 rd.ReactiveConnection = ReactiveConnection
