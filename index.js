@@ -1,5 +1,7 @@
 const Dao = require("./lib/Dao.js")
 
+Dao.Dao = Dao
+
 const Observable = require("./lib/Observable.js")
 Dao.Observable = Observable
 
@@ -50,7 +52,13 @@ Dao.DaoProxy = DaoProxy
 const DaoCache = require("./lib/DaoCache.js")
 Dao.DaoCache = DaoCache
 
+const Path = require("./lib/Path.js")
+Dao.Path = Path
+
 const collectPointers = require("./lib/collectPointers.js")
 Dao.collectPointers = collectPointers
 
+Dao.global = Dao
+
 module.exports = Dao
+

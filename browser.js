@@ -1,5 +1,6 @@
 import Dao from "./lib/Dao.js"
 let rd = Dao
+rd.Dao = Dao
 
 import Observable from "./lib/Observable.js"
 rd.Observable = Observable
