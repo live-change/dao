@@ -11,7 +11,7 @@ test('create connection', (t) => {
   t.plan(1)
   server = new ReactiveDao.ReactiveServer(testServerDao.promised)
   let connectedOnce;
-  client = new LoopbackConnection(sessionId, server, {
+  client = new LoopbackConnection({ sessionId }, server, {
     onConnect: () => {
       if(connectedOnce) return;
       connectedOnce = true

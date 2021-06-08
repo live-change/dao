@@ -21,7 +21,7 @@ test("time synchronization", (t) => {
   t.test('create connection', (t) => {
     t.plan(1)
     server = new ReactiveDao.ReactiveServer(testServerDao.promised)
-    client = new LoopbackConnection(sessionId, server, {
+    client = new LoopbackConnection({ sessionId }, server, {
       onConnect: () => t.pass("connected"),
       delay: 50,
       timeSynchronization

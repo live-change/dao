@@ -15,7 +15,7 @@ test("request resend", (t) => {
     server = new ReactiveDao.ReactiveServer(testServerDao.promised, {
       logErrors: true
     })
-    client = new LoopbackConnection(sessionId, server, {
+    client = new LoopbackConnection({ sessionId }, server, {
       onConnect: () => t.pass("connected"),
       delay: 50,
       autoReconnectDelay: 400,

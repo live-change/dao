@@ -104,9 +104,10 @@ const projectIds = new ReactiveDao.ObservableList(projects.map(u => u.id))
 const projectObservables = projects.map(u => new ReactiveDao.ObservableValue(u))
 
 
-function generator(sessionId) {
+function generator(credentials) {
+  const { sessionId } = credentials
   console.log("CREATE DAO")
-  return new ReactiveDao(sessionId, {
+  return new ReactiveDao(credentials, {
     test: {
       type: "local",
       source: new ReactiveDao.SimpleDao({
@@ -279,14 +280,14 @@ function generator(sessionId) {
 
 module.exports.instant = generator
 
-module.exports.promised = (sessionId) => new Promise((resolve, reject) => {
-  setTimeout(() => resolve(generator(sessionId)), 50)
+module.exports.promised = (credentials) => new Promise((resolve, reject) => {
+  setTimeout(() => resolve(generator(credentials)), 50)
 })
 
-module.exports.failedPromise = (sessionId) => new Promise((resolve, reject) => {
+module.exports.failedPromise = (credentials) => new Promise((resolve, reject) => {
   setTimeout(() => reject("error"))
 })
 
-module.exports.failed = (sessionId) => { throw new Error("error") }
+module.exports.failed = (credentials) => { throw new Error("error") }
 
 module.exports.ObservableCounter = ObservableCounter

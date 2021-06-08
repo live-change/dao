@@ -18,7 +18,7 @@ test("loopback connection", (t) => {
   let client
   t.test('connect to server', (t) => {
     t.plan(1)
-    client = new LoopbackConnection(sessionId, server, {
+    client = new LoopbackConnection({ sessionId }, server, {
       onConnect: () => t.pass("connected"),
       delay: 50
     })

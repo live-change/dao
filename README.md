@@ -92,7 +92,7 @@ There are many deprecated implementations of reactive-observer, the effort of ma
 We can create on server side observable values related to client as well as global ones:
 
 ```
-const ReactiveDao = require("../index.js")
+const Dao = require("@live-change/dao")
 
 let timeObservable = new ReactiveDao.ObservableValue(Date.now());
 let clicksObservable = new ReactiveDao.ObservableList([]);
@@ -107,11 +107,11 @@ setInterval(() => {
 This implementation is based on DAO(data access object) concept that is proven useful in isomorfic applications(in example SPA with server side renderer). DAO objects are related to connections, so we need a generator:
 
 ```
-function generator(sessionId) {
-  return new ReactiveDao(sessionId, { // New reactive dao object
+function generator(credentials) {
+  return new eDao(credentials, { // New reactive dao object
     test: { // one of sub data objects/paths
       type: "local", // local object, it can be remote(server->server) as well 
-      source: new ReactiveDao.SimpleDao({ // Simple DAO object implementation
+      source: new Dao.SimpleDao({ // Simple DAO object implementation
         values: { // values that are shared
           time: {
             observable() { // returns observable object or promise of one
@@ -131,14 +131,14 @@ function generator(sessionId) {
 Next we need to create server:
 
 ```
-const server = new ReactiveDao.ReactiveServer(testServerDao.promised)
+const server = new Dao.ReactiveServer(testServerDao.promised)
 ```
 
 And connect to server:
 
 ```
 /// Loopback connection is used for testing, there are also websocket and SockJS implementations
-client = new LoopbackConnection(sessionId, server, {
+client = new LoopbackConnection(credentials, server, {
   onConnect: () => {}, // method called when connection is ready
   delay: 50 // delay for testing
 })
@@ -160,9 +160,9 @@ There is also possible to create client-side DAO that uses server-side DAO.
 
 ```
 import ReactiveDao from "reactive-dao"
-import ReactiveSockJS from "reactive-dao-sockjs"
+import DaoSockJS from "reactive-dao-sockjs"
 
-export default (sessionId) => new ReactiveDao(sessionId, {
+export default (credentials) => new Dao(credentials, {
 
   protocols: {
     'sockjs': ReactiveSockJS

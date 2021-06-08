@@ -12,7 +12,7 @@ test("time value", (t) => {
   t.test('create connection with dao factory returning failed promise', (t) => {
     t.plan(1)
     server = new ReactiveDao.ReactiveServer(testServerDao.failedPromise)
-    client = new LoopbackConnection(sessionId, server, {
+    client = new LoopbackConnection({ sessionId }, server, {
       delay: 50
     })
     client.once('authenticationError', (err) => t.pass("authentication failed!"))
@@ -21,7 +21,7 @@ test("time value", (t) => {
   t.test('create connection with dao factory throwing exception', (t) => {
     t.plan(1)
     server = new ReactiveDao.ReactiveServer(testServerDao.failed)
-    client = new LoopbackConnection(sessionId, server, {
+    client = new LoopbackConnection({ sessionId }, server, {
       delay: 50
     })
     client.once('authenticationError', (err) => t.pass("authentication failed!"))

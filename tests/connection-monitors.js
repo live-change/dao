@@ -22,7 +22,7 @@ test("connection monitors", (t) => {
         })
       }
     })
-    client = new LoopbackConnection(sessionId, server, {
+    client = new LoopbackConnection({ sessionId }, server, {
       onConnect: () => {
         serverConnection = server.connections.get(server.lastConnectionId)
         t.pass("connected")
