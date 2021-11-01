@@ -14,6 +14,10 @@ import ObservableList from "./lib/ObservableList.js"
 rd.ObservableList = ObservableList
 export { ObservableList }
 
+import ExtendedObservableList from "./lib/ExtendedObservableList.js"
+rd.ExtendedObservableList = ExtendedObservableList
+export { ExtendedObservableList }
+
 import DaoPrerenderCache from "./lib/DaoPrerenderCache.js"
 const ReactiveCache = DaoPrerenderCache // backward compatibility
 rd.ReactiveCache = DaoPrerenderCache // backward compatibility

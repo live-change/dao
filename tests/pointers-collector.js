@@ -5,43 +5,47 @@ test("pointers collector", (t) => {
   t.plan(14)
 
   t.test("simple property", (t) => {
-    t.plan(1)
+    t.plan(2)
     let pointers = ReactiveDao.collectPointers({
       user: "123"
     },[
       ["users", "User", { property: "user" }]
     ])
-    t.deepEqual(pointers, [["users","User","123"]], "found one user")
+    t.equal(!!pointers.many, false)
+    t.deepEqual(pointers.slice(), [["users","User","123"]], "found one user")
   })
 
   t.test("simple property from array", (t) => {
-    t.plan(1)
+    t.plan(2)
     let pointers = ReactiveDao.collectPointers([
       { user: "123" },
       { user: "233" }
     ],[
       ["users", "User", { property: "user" }]
     ])
-    t.deepEqual(pointers, [["users","User","123"], ["users","User","233"]], "found two users")
+    t.equal(!!pointers.many, true)
+    t.deepEqual(pointers.slice(), [["users","User","123"], ["users","User","233"]], "found two users")
   })
 
   t.test("identity pointers", (t) => {
-    t.plan(1)
+    t.plan(2)
     let pointers = ReactiveDao.collectPointers([ 0, 1, 2, 3 ], [
       [ 'test', 'user', { identity: true } ]
     ])
-    t.deepEqual(pointers, [ [ 'test', 'user', 0 ], [ 'test', 'user', 1 ], [ 'test', 'user', 2 ],
+    t.equal(!!pointers.many, true)
+    t.deepEqual(pointers.slice(), [ [ 'test', 'user', 0 ], [ 'test', 'user', 1 ], [ 'test', 'user', 2 ],
       [ 'test', 'user', 3 ] ])
   })
 
   t.test("array property tags", (t) => {
-    t.plan(1)
+    t.plan(2)
     let pointers = ReactiveDao.collectPointers({
       tags: ["1", "2", "3"]
     },[
       ["tags", "Tag", { property: "tags" }]
     ])
-    t.deepEqual(pointers, [
+    t.equal(!!pointers.many, true)
+    t.deepEqual(pointers.slice(), [
         ["tags","Tag","1"],
         ["tags","Tag","2"],
         ["tags","Tag","3"]
@@ -49,7 +53,7 @@ test("pointers collector", (t) => {
   })
 
   t.test("nested property", (t) => {
-    t.plan(1)
+    t.plan(2)
     let pointers = ReactiveDao.collectPointers({
       userData: {
         country: "PL"
@@ -57,7 +61,8 @@ test("pointers collector", (t) => {
     },[
       ["country", { property: ["userData", "country"] }]
     ])
-    t.deepEqual(pointers, [["country","PL"]], "found nested property value")
+    t.equal(!!pointers.many, false)
+    t.deepEqual(pointers.slice(), [["country","PL"]], "found nested property value")
   })
 
   t.test("object result", (t) => {
@@ -72,7 +77,7 @@ test("pointers collector", (t) => {
       } },
       { object: { path: ["tags", { property: "tags" }] } }
     ])
-    t.deepEqual(pointers, [
+    t.deepEqual(pointers.slice(), [
       { path: ["user", { user: "123" }], next: [[ "picture", { property: "picture" } ]] },
       { path: ["tags","1"] },
       { path: ["tags","2"] },
@@ -91,7 +96,7 @@ test("pointers collector", (t) => {
         { source: 'interests', schema: { array: { identity: true } }},
         { source: { static: 'city' }, schema: { property: "name" } }]
     ], (src) => sources[src])
-    t.deepEqual(pointers, [ [ 'findProjects', [ 'cats', 'dogs', 'birds' ], 'NY' ] ])
+    t.deepEqual(JSON.parse(JSON.stringify(pointers)), [ [ 'findProjects', [ 'cats', 'dogs', 'birds' ], 'NY' ] ])
   })
 
   t.test("undefined argument", (t) => {
@@ -99,7 +104,7 @@ test("pointers collector", (t) => {
     let pointers = ReactiveDao.collectPointers({ sessionId: 1 },[
       ["users", "User", { property: "user" }]
     ])
-    t.deepEqual(pointers, [])
+    t.deepEqual(pointers.slice(), [])
   })
 
   t.test("undefined argument in object", (t) => {
@@ -107,7 +112,7 @@ test("pointers collector", (t) => {
     let pointers = ReactiveDao.collectPointers({ sessionId: 1 },[
       ["users", "User", { object: { user: { property: "user" }}}]
     ])
-    t.deepEqual(pointers, [])
+    t.deepEqual(pointers.slice(), [])
   })
 
   t.test("switch match", (t) => {
@@ -120,7 +125,7 @@ test("pointers collector", (t) => {
           US: "New York"
         }}]
     ])
-    t.deepEqual(pointers, [["Warsaw"]], "switch working")
+    t.deepEqual(pointers.slice(), [["Warsaw"]], "switch working")
   })
 
   t.test("switch default", (t) => {
@@ -134,7 +139,7 @@ test("pointers collector", (t) => {
         },
         default: "London"}]
     ])
-    t.deepEqual(pointers, [["London"]], "switch working")
+    t.deepEqual(pointers.slice(), [["London"]], "switch working")
   })
 
   t.test("switch not match", (t) => {
@@ -147,7 +152,7 @@ test("pointers collector", (t) => {
           US: "New York"
         }}]
     ])
-    t.deepEqual(pointers, [], "switch working")
+    t.deepEqual(pointers.slice(), [], "switch working")
   })
 
   t.test("test nonEmpty", (t) => {
@@ -157,7 +162,7 @@ test("pointers collector", (t) => {
     },[
       ["users", "User", { nonEmpty: { property: "user" }}]
     ])
-    t.deepEqual(pointers, [], "nulls are filtered")
+    t.deepEqual(pointers.slice(), [], "nulls are filtered")
   })
 
   t.test("test complex property fetch", (t) => {
@@ -187,7 +192,7 @@ test("pointers collector", (t) => {
           category: { nonEmpty: { property: ['data', 'sidebarItems','category'] } }
       } }]
     ])
-    t.deepEqual(pointers, [
+    t.deepEqual(pointers.slice(), [
           [
             "categories",
             "CategoryOne",

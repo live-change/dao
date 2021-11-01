@@ -11,6 +11,9 @@ Dao.ObservableValue = ObservableValue
 const ObservableList = require("./lib/ObservableList.js")
 Dao.ObservableList = ObservableList
 
+const ExtendedObservableList = require("./lib/ExtendedObservableList.js")
+Dao.ExtendedObservableList = ExtendedObservableList
+
 const ReactiveServer = require("./lib/ReactiveServer.js")
 Dao.ReactiveServer = ReactiveServer
 
